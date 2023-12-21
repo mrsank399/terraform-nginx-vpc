@@ -63,11 +63,11 @@ resource "aws_lb_listener" "front_end" {
 }
 
 ####################################
-## attach instance to load balancer
+## attach instance to load balancer - testing SSM and ALB against EC2
 ####################################
 
-resource "aws_lb_target_group_attachment" "attach_ec2" {
-  target_group_arn = aws_lb_target_group.main.arn
-  target_id        = var.ec2_instance_id
-  port             = 80
-}
+#resource "aws_lb_target_group_attachment" "attach_ec2" {
+#  target_group_arn = aws_lb_target_group.main.arn
+#  target_id        = var.ec2_instance_id
+#  port             = 80
+#}

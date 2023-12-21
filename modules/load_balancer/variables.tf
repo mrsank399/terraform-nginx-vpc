@@ -20,6 +20,7 @@ variable "alb_target_group_name" {
   default = "nginx-target-group"
 }
 
-variable "ec2_instance_id" {
-  type = string
-}
+// use this when test against EC2 instance
+#variable "ec2_instance_id" {
+#  type = string
+#}

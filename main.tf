@@ -45,20 +45,21 @@ module "security_groups" {
   instance_listener_port = 0
 }
 
-module "ec2" {
-  source               = "./modules/ec2"
-  private_subnet       = module.subnets.private_subnet_1_id
-  security_group       = module.security_groups.nginx_security_group_id
-  iam_instance_profile = module.ssm_role.ssm_instance_profile
-  public_subnet        = module.subnets.public_subnet_1_id
-}
+# Module is for testing SSM and ALB against single EC2
+#module "ec2" {
+#  source               = "./modules/ec2"
+#  private_subnet       = module.subnets.private_subnet_1_id
+#  security_group       = module.security_groups.nginx_security_group_id
+#  iam_instance_profile = module.ssm_role.ssm_instance_profile
+#  public_subnet        = module.subnets.public_subnet_1_id
+#}
 
 module "load_balancer" {
   source            = "./modules/load_balancer"
   vpc_id            = module.vpc.vpc_id
   subnets           = [module.subnets.public_subnet_1_id, module.subnets.public_subnet_2_id]
   security_group_id = module.security_groups.alb_security_group_id
-  ec2_instance_id   = module.ec2.nginx_instance_id
+  #  ec2_instance_id   = module.ec2.nginx_instance_id    // used this for testing SSM and ALB against EC2
 }
 
 module "cloudfront" {
